@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Vitor Cavalcante">
+  <rect width="64" height="64" rx="18" fill="#141417"/>
+  <rect x="1" y="1" width="62" height="62" rx="17" fill="none" stroke="#ffffff1f"/>
+  <circle cx="16" cy="17" r="4" fill="#b14454"/>
+  <text x="31" y="43" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="30" font-weight="500" fill="#f4ebe8" letter-spacing="-4">V</text>
+  <text x="42" y="43" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="30" font-weight="500" fill="#b14454" letter-spacing="-4">C</text>
+</svg>
