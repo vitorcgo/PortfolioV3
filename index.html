@@ -2576,18 +2576,20 @@
   .s-head{margin-bottom:28px}
   .s-head h2{font-size:clamp(30px,10vw,40px)}
 
-  .hero{min-height:auto;padding:86px 16px 28px}
-  .hero-main{min-height:38vh}
+  .hero{min-height:auto;padding:84px 0 26px;width:100%;align-items:stretch}
+  .hero-main{min-height:40vh;width:100%;padding:0 12px}
+  .hero-foot-wrap{width:100%;max-width:none;padding:0}
+  .hero-text{width:100%;max-width:none}
   .hero-text{gap:12px}
-  .hero h1{font-size:clamp(36px,9.6vw,48px);line-height:.98}
+  .hero h1{font-size:clamp(43px,12.4vw,58px);line-height:.94}
   .hero-loop{margin-top:0;gap:6px;transform:scale(.86);transform-origin:center;font-size:.72rem}
-  .hero-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-  .hero-action{min-height:44px;display:flex;flex-direction:column;gap:2px;border-radius:10px;padding:8px}
-  .hero-action span{font-size:.54rem;letter-spacing:.09em;color:var(--muted)}
-  .hero-action strong{font-size:.76rem;line-height:1.1}
+  .hero-actions{display:grid;grid-template-columns:1fr 1fr;gap:6px;width:100%;padding:0 4px}
+  .hero-action{min-height:40px;display:flex;flex-direction:column;gap:1px;border-radius:9px;padding:7px 6px}
+  .hero-action span{font-size:.5rem;letter-spacing:.08em;color:var(--muted)}
+  .hero-action strong{font-size:.72rem;line-height:1.05}
   .hero-action::after{display:none}
-  .hero-foot{margin-top:26px;padding-top:20px;gap:16px}
-  .hf-bio p{font-size:1rem;max-width:29ch;line-height:1.32}
+  .hero-foot{margin-top:28px;padding:20px 12px 0;gap:16px;border-top:1px solid var(--line);width:100%;max-width:none}
+  .hf-bio p{font-size:1.02rem;max-width:34ch;line-height:1.32;margin-left:auto;margin-right:auto}
   .hf-meta{grid-template-columns:1fr 1fr;gap:0;padding:0;text-align:left;overflow:hidden}
   .hf-stat{padding:14px;align-items:flex-start}
   .hf-divider{display:none}
@@ -2673,10 +2675,11 @@
 }
 
 @media (max-width:390px){
-  .hero{padding-top:78px}
-  .hero h1{font-size:clamp(34px,9.4vw,44px)}
+  .hero{padding-top:76px}
+  .hero-main{padding:0 10px}
+  .hero h1{font-size:clamp(41px,12vw,52px)}
   .status-pill{letter-spacing:.08em}
-  .hero-loop{transform:scale(.82)}
+  .hero-loop{transform:scale(.8)}
   .hero-actions{grid-template-columns:1fr}
   .quick-proof{grid-template-columns:1fr}
   .qp-item,.qp-item:nth-child(3),.qp-item:nth-child(5){border-right:none}
