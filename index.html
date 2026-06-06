@@ -340,13 +340,14 @@
     nav.top .brand-mark{width:18px;height:18px;border-radius:6px}
     nav.top .brand .label-full{display:none}
     nav.top .brand .label-short{display:inline}
-    nav.top .cv-link{display:none}
+    nav.top .cv-link{display:inline-flex;width:30px;height:30px;padding:0;align-items:center;justify-content:center;border-radius:50%;flex-shrink:0}
+    nav.top .cv-link span{display:none}
     nav.top .nav-right{display:flex;align-items:center;gap:6px;margin-left:auto}
     nav.top .cta{position:static;transform:none;padding:6px 6px 6px 10px;font-size:.72rem;gap:5px;white-space:nowrap;min-height:28px}
     nav.top .cta .cta-full{display:none}
     nav.top .cta .cta-short{display:inline}
     nav.top .cta .cta-arrow{width:20px;height:20px;font-size:.78rem}
-    .theme-toggle{position:relative;right:auto;top:auto;transform:none;width:38px;height:22px}
+    .theme-toggle{position:relative;right:auto;top:auto;transform:none;width:38px;height:22px;flex-shrink:0}
     .theme-toggle::before{width:14px;height:14px;transform:translate(18px,-50%)}
     :root[data-theme="dark"] .theme-toggle::before{transform:translate(0,-50%)}
     .theme-toggle .ti{width:10px;height:10px}
@@ -359,6 +360,7 @@
     nav.top .cta .cta-short{display:none}
     nav.top .cta .cta-arrow{margin:0;width:20px;height:20px}
     .theme-toggle{width:36px}
+    nav.top .cv-link{width:28px;height:28px}
   }
 
   /* ---------------- HERO ---------------- */
@@ -1006,7 +1008,10 @@
     display:flex;flex-direction:column;gap:20px;
     flex:0 0 calc(50% - 14px);min-width:0;
   }
-  @media(max-width:600px){.quote{flex:0 0 calc(82% - 14px);padding:28px}}
+  @media(max-width:600px){
+    .quotes{gap:0}
+    .quote{flex:0 0 100%;padding:28px}
+  }
   .quote .mark{
     font-family:var(--serif);font-size:5rem;line-height:.4;color:var(--accent);
     margin-bottom:-4px;
@@ -2365,7 +2370,7 @@
   });
 })();
 
-// --- Carrossel de depoimentos (2 visíveis, infinite loop) ---
+// --- Carrossel de depoimentos responsivo ---
 (function(){
   const clip  = document.querySelector('.quotes-clip');
   const track = document.getElementById('quotesTrack');
@@ -2374,33 +2379,46 @@
   const nextBtn  = document.getElementById('quotesNext');
   if(!clip||!track) return;
 
-  const STEP = 2;                          // cards por vez
-  let originals = Array.from(track.querySelectorAll('.quote'));
-  if(originals.length % STEP !== 0){
-    const filler = originals[0].cloneNode(true);
-    filler.setAttribute('aria-hidden','true');
-    filler.classList.add('quote-filler');
-    track.appendChild(filler);
-    originals = Array.from(track.querySelectorAll('.quote'));
-  }
-  const POSITIONS = originals.length / STEP;
-
-  // Clona últimos STEP antes + primeiros STEP depois → loop infinito
-  // Prepend em ordem reversa para manter sequência
-  originals.slice(-STEP).reverse().forEach(c=>{
-    const cl=c.cloneNode(true); cl.setAttribute('aria-hidden','true');
-    track.prepend(cl);
-  });
-  originals.slice(0,STEP).forEach(c=>{
-    const cl=c.cloneNode(true); cl.setAttribute('aria-hidden','true');
-    track.appendChild(cl);
-  });
-  let idx = STEP;   // índice (0-based) do primeiro card visível; começa em orig1
+  const baseItems = Array.from(track.querySelectorAll('.quote')).map(c=>c.cloneNode(true));
+  let step = window.matchMedia('(max-width:600px)').matches ? 1 : 2;
+  let positions = Math.ceil(baseItems.length / step);
+  let idx = step;
   let busy = false;
 
+  function build(){
+    step = window.matchMedia('(max-width:600px)').matches ? 1 : 2;
+    const items = baseItems.map(c=>c.cloneNode(true));
+    while(step > 1 && items.length % step !== 0){
+      const filler = baseItems[0].cloneNode(true);
+      filler.setAttribute('aria-hidden','true');
+      filler.classList.add('quote-filler');
+      items.push(filler);
+    }
+    positions = items.length / step;
+    track.innerHTML='';
+    items.slice(-step).reverse().forEach(c=>{
+      const cl=c.cloneNode(true);
+      cl.setAttribute('aria-hidden','true');
+      track.prepend(cl);
+    });
+    items.forEach(c=>track.appendChild(c));
+    items.slice(0,step).forEach(c=>{
+      const cl=c.cloneNode(true);
+      cl.setAttribute('aria-hidden','true');
+      track.appendChild(cl);
+    });
+    idx = step;
+    busy = false;
+    buildDots();
+    applyTranslate(false);
+    requestAnimationFrame(()=>{ track.style.transition=''; });
+  }
+
   function perCardPx(){
-    const gap = parseFloat(getComputedStyle(track).gap)||28;
-    return originals[0].offsetWidth + gap;
+    const rawGap = parseFloat(getComputedStyle(track).gap);
+    const gap = Number.isFinite(rawGap) ? rawGap : 28;
+    const card = track.querySelector('.quote');
+    return card.offsetWidth + gap;
   }
 
   function applyTranslate(animate){
@@ -2411,7 +2429,7 @@
   }
 
   function dotAt(){
-    return ((idx - STEP) / STEP + POSITIONS) % POSITIONS;
+    return ((idx - step) / step + positions) % positions;
   }
 
   function syncDots(){
@@ -2424,7 +2442,7 @@
   function go(dir){
     if(busy) return;
     busy=true;
-    idx += dir * STEP;
+    idx += dir * step;
     applyTranslate(true);
     syncDots();
   }
@@ -2432,24 +2450,26 @@
   track.addEventListener('transitionend', e=>{
     if(e.propertyName!=='transform') return;
     const total = track.querySelectorAll('.quote').length;
-    if(idx >= total - STEP){          // passou clone forward → volta ao real início
-      idx = STEP;
+    if(idx >= total - step){
+      idx = step;
       applyTranslate(false);
-    } else if(idx < STEP){            // passou clone backward → vai ao real fim
-      idx = total - STEP * 2;
+    } else if(idx < step){
+      idx = total - step * 2;
       applyTranslate(false);
     }
     requestAnimationFrame(()=>{ track.style.transition=''; busy=false; });
   });
 
-  if(dotsWrap){
-    for(let i=0;i<POSITIONS;i++){
+  function buildDots(){
+    if(!dotsWrap) return;
+    dotsWrap.innerHTML='';
+    for(let i=0;i<positions;i++){
       const d=document.createElement('button');
       d.className='quotes-dot'+(i===0?' active':'');
-      d.setAttribute('aria-label','Grupo '+(i+1)+' de depoimentos');
+      d.setAttribute('aria-label', step===1 ? 'Depoimento '+(i+1) : 'Grupo '+(i+1)+' de depoimentos');
       d.addEventListener('click',()=>{
         if(busy) return;
-        const target = STEP + i*STEP;
+        const target = step + i*step;
         if(target===idx) return;
         busy=true; idx=target;
         applyTranslate(true); syncDots();
@@ -2468,9 +2488,15 @@
     if(Math.abs(e.changedTouches[0].clientX-tx)>40) go(e.changedTouches[0].clientX<tx?1:-1);
   },{passive:true});
 
-  // Init
-  applyTranslate(false);
-  requestAnimationFrame(()=>{ track.style.transition=''; });
+  let resizeTimer;
+  window.addEventListener('resize',()=>{
+    const nextStep = window.matchMedia('(max-width:600px)').matches ? 1 : 2;
+    if(nextStep === step) return;
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(build,120);
+  });
+
+  build();
 
   // Autoplay – pausa no hover
   let timer;
