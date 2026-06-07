@@ -2622,6 +2622,7 @@
   .hf-stat + .hf-stat{border-left:1px solid var(--line)}
   .hf-num{font-size:2.05rem}
   .hf-now{font-size:1.12rem}
+  .hero > .scroll-cue{position:static !important;left:auto;right:auto;bottom:auto;transform:none;margin:12px auto 0;width:max-content}
 
   .quick-proof{margin:0 18px;border:1px solid var(--line);grid-template-columns:1fr 1fr}
   .quick-proof .qp-title{grid-column:1/-1;padding:18px;border-bottom:1px solid var(--line)}
@@ -2875,22 +2876,19 @@
 })();
 </script>
 
-<script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
 <script>
-  // Scroll suave (Lenis)
+  // Scroll suave apenas para links internos; roda/trackpad ficam nativos.
   window.__lenis = null;
   (function(){
-    if(typeof Lenis==='undefined') return;
-    const lenis=new Lenis({duration:1.15, easing:t=>1-Math.pow(1-t,3), smoothWheel:true, smoothTouch:false, prevent:node=>node.id==='pmPanel'||node.closest('#pmPanel')});
-    window.__lenis = lenis;
-    function raf(time){lenis.raf(time);requestAnimationFrame(raf);}
-    requestAnimationFrame(raf);
     document.querySelectorAll('a[href^="#"]').forEach(a=>{
       a.addEventListener('click',e=>{
         const id=a.getAttribute('href');
         if(!id||id==='#') return;
         const t=document.querySelector(id);
-        if(t){e.preventDefault();lenis.scrollTo(t,{offset:-80});}
+        if(t){
+          e.preventDefault();
+          window.scrollTo({top:t.getBoundingClientRect().top+window.scrollY-80, behavior:'smooth'});
+        }
       });
     });
   })();
