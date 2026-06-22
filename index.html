@@ -91,7 +91,7 @@
         { "@type": "ListItem", "position": 1, "item": { "@type": "CreativeWork", "name": "Aylo.me", "url": "https://aylo.me", "creator": { "@id": "https://vitorgomes.tech/#person" }, "programmingLanguage": ["TypeScript", "React", "Next.js"] } },
         { "@type": "ListItem", "position": 2, "item": { "@type": "CreativeWork", "name": "Flamexs E-commerce", "url": "https://flamexs-ecommerce-production.up.railway.app/", "creator": { "@id": "https://vitorgomes.tech/#person" }, "programmingLanguage": ["PHP", "Laravel", "JavaScript"] } },
         { "@type": "ListItem", "position": 3, "item": { "@type": "CreativeWork", "name": "Speed Meeting Sorteio", "url": "https://speedmeeting.com.br", "creator": { "@id": "https://vitorgomes.tech/#person" }, "programmingLanguage": ["PHP", "Laravel", "JavaScript"] } },
-        { "@type": "ListItem", "position": 4, "item": { "@type": "CreativeWork", "name": "FlowDesk", "creator": { "@id": "https://vitorgomes.tech/#person" }, "programmingLanguage": ["Java", "Spring Boot", "TypeScript", "React", "PostgreSQL"] } },
+        { "@type": "ListItem", "position": 4, "item": { "@type": "SoftwareApplication", "name": "A Cidade Dorme", "url": "https://cidade-dorme-ten.vercel.app/", "applicationCategory": "GameApplication", "creator": { "@id": "https://vitorgomes.tech/#person" }, "programmingLanguage": ["TypeScript", "React", "Next.js"], "softwareRequirements": ["Supabase", "Realtime", "Edge Functions"] } },
         { "@type": "ListItem", "position": 5, "item": { "@type": "CreativeWork", "name": "Engine Dance Habbo", "creator": { "@id": "https://vitorgomes.tech/#person" }, "programmingLanguage": ["TypeScript", "React", "CodeMirror", "Nitro"] } }
       ]
     }
@@ -1758,16 +1758,19 @@
       <span class="project-arrow">↗</span>
     </button>
 
-    <button type="button" class="project" data-project="flowdesk">
+    <button type="button" class="project" data-project="cidadedorme">
       <span class="project-num">→ 04</span>
       <div>
-        <div class="project-title">Flow<span class="it">Desk</span></div>
+        <div class="project-title">Cidade <span class="it">Dorme</span></div>
         <div class="project-tags">
-          <span>Java</span><span>Spring Boot</span><span>React</span><span>PostgreSQL</span><span>JWT</span>
+          <span>Next.js 16</span><span>React 19</span><span>Supabase</span><span>Realtime</span><span>Edge Functions</span>
         </div>
       </div>
-      <div class="project-desc">Sistema corporativo de chamados, SLA, Kanban, auditoria e relatórios para demonstrar domínio full-stack empresarial.</div>
-      <div class="project-meta">2026 autoral</div>
+      <div class="project-desc">Jogo multiplayer online de papéis ocultos, com salas, chat, sorteio secreto, noite/dia, votação e realtime server-side.</div>
+      <div class="project-meta-wrap">
+        <div class="project-meta">jun 2026 online</div>
+        <img class="project-thumb" src="images/Cidade Dorme/1.png" alt="A Cidade Dorme preview" loading="lazy">
+      </div>
       <span class="project-case">Ver case →</span>
       <span class="project-arrow">↗</span>
     </button>
@@ -2203,18 +2206,22 @@
       repo:"https://github.com/guzzkj/flamexs-ecommerce",
       repoLabel:"Ver repositório"
     },
-    flowdesk:{
-      num:"04", title:'Flow<span class="it">Desk</span>',
-      status:"Projeto autoral · 2026",
-      lead:"Sistema corporativo de chamados, SLA, Kanban, auditoria e relatórios, pensado para mostrar domínio de produto interno empresarial.",
-      role:"Desenvolvedor Full-stack", team:"Solo", year:"2026", scope:"sistema corporativo",
-      coverLabel:"FLOWDESK · sistema interno",
-      gallery:["FLOWDESK · dashboard","FLOWDESK · chamados","FLOWDESK · Kanban","FLOWDESK · auditoria","FLOWDESK · relatórios"],
-      problem:"Empresas precisam centralizar solicitações internas, priorizar chamados, acompanhar SLA e manter rastreabilidade sem depender de conversas soltas ou planilhas.",
-      solution:["API Java Spring Boot com autenticação JWT, refresh token, RBAC e respostas padronizadas.","Interface React TypeScript com dashboard, lista de chamados, Kanban, detalhe do chamado, usuários, auditoria e relatórios.","PostgreSQL com modelagem relacional, migrations, seed demo, filtros, índices e dados pensados para apresentação.","Logs estruturados, request id, status codes consistentes e auditoria de ações importantes.","Plano de deploy público com Vercel no frontend, Oracle Cloud Always Free no backend e Aiven PostgreSQL no banco."],
-      metrics:[["SLA","fluxo","prioridade e prazo"],["RBAC","acesso","perfis e permissões"],["Auditoria","logs","rastreabilidade real"]],
-      stack:["Java 21","Spring Boot 3","React","TypeScript","PostgreSQL","Docker","JWT","OpenAPI","Vercel","Oracle Cloud","Aiven"],
-      privateLabel:"Projeto autoral · em construção"
+    cidadedorme:{
+      num:"04", title:'Cidade <span class="it">Dorme</span>',
+      status:"Projeto autoral · jun 2026",
+      lead:"Jogo multiplayer online de papéis ocultos inspirado em Máfia/Cidade Dorme, com salas em tempo real, sorteio secreto de funções, ciclos Noite-Dia, votação, chat e atmosfera noir de boletim policial.",
+      role:"Full-stack solo", team:"Solo", year:"2026", scope:"multiplayer realtime",
+      coverLabel:"CIDADE DORME · lobby",
+      gallery:["CIDADE DORME · home","CIDADE DORME · salas abertas","CIDADE DORME · ficha","CIDADE DORME · painel do host","CIDADE DORME · noite assassino","CIDADE DORME · votação","CIDADE DORME · decisão","CIDADE DORME · vitória cidade","CIDADE DORME · vitória assassinos","CIDADE DORME · chat e partida","CIDADE DORME · como jogar"],
+      images:["images/Cidade Dorme/1.png","images/Cidade Dorme/2.png","images/Cidade Dorme/3.png","images/Cidade Dorme/6.png","images/Cidade Dorme/12.png","images/Cidade Dorme/15.png","images/Cidade Dorme/16.png","images/Cidade Dorme/17.png","images/Cidade Dorme/18.png","images/Cidade Dorme/20.png","images/Cidade Dorme/22.png"],
+      thumb:"images/Cidade Dorme/1.png",
+      problem:"Transformar Cidade Dorme em uma experiência online completa: criar sala, reunir jogadores, distribuir papéis secretos com segurança, sincronizar fases e impedir que o jogo dependa de narrador manual ou combinados fora da tela.",
+      solution:["SPA em Next.js 16 com React 19 e TypeScript, organizada por telas de entrada, lobby, partida e estados de sistema.","Backend Supabase com Auth anônima, Postgres, RLS, Realtime Broadcast e Edge Functions para ações autoritativas.","Sorteio server-side com papéis privados em tabela separada, evitando exposição de assassino, anjo e cidadão no cliente.","Loop Noite → Amanhecer → Dia → Votação → Fim com ações de assassino/anjo, votação, desempate, revanche, espectador e histórico.","Chat em tempo real por contexto de jogo, presença/reconexão, host transfer, limpeza de salas e rate limit nas mensagens.","Direção visual noir anos 1940-50 com cartas de suspeitos, carimbos, rádio, trilha/efeitos e interface responsiva mobile."],
+      metrics:[["24","telas","fluxo completo do jogo"],["Realtime","sync","salas, chat e fases"],["Edge","regras","ações validadas no servidor"]],
+      stack:["Next.js 16","React 19","TypeScript","Supabase Auth","Postgres","Realtime","Edge Functions","Zustand","Zod","Tailwind CSS","Vercel"],
+      link:"https://cidade-dorme-ten.vercel.app/",
+      linkLabel:"Ver site online",
+      privateLabel:"Projeto autoral · online"
     },
     enginehabbo:{
       num:"05", title:'Engine Dance <span class="it">Habbo</span>',
