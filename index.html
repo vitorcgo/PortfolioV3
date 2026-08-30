@@ -11,8 +11,7 @@
 <meta name="creator" content="Vitor Cavalcante" />
 <meta name="publisher" content="Vitor Cavalcante" />
 <meta name="keywords" content="Vitor Cavalcante, desenvolvedor front-end, desenvolvedor full-stack, React, Next.js, TypeScript, portfolio desenvolvedor, SaaS, dashboards, e-commerce, São Paulo" />
-<meta name="theme-color" content="#141417" media="(prefers-color-scheme: dark)" />
-<meta name="theme-color" content="#f4ebe8" media="(prefers-color-scheme: light)" />
+<meta name="theme-color" id="themeColorMeta" content="#141417" />
 <meta name="color-scheme" content="dark light" />
 <meta name="format-detection" content="telephone=no" />
 <meta name="referrer" content="strict-origin-when-cross-origin" />
@@ -29,11 +28,11 @@
 <meta property="og:url" content="https://vitorgomes.tech/" />
 <meta property="og:image" content="https://vitorgomes.tech/images/eu.jpeg" />
 <meta property="og:image:secure_url" content="https://vitorgomes.tech/images/eu.jpeg" />
-<meta property="og:image:type" content="image/png" />
-<meta property="og:image:width" content="1892" />
-<meta property="og:image:height" content="897" />
+<meta property="og:image:type" content="image/jpeg" />
+<meta property="og:image:width" content="400" />
+<meta property="og:image:height" content="400" />
 <meta property="og:image:alt" content="Foto de Vitor Cavalcante" />
-<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:card" content="summary" />
 <meta name="twitter:title" content="Vitor Cavalcante | Desenvolvedor Front-end e Full-stack" />
 <meta name="twitter:description" content="Portfolio com projetos em React, Next.js, TypeScript, SaaS, dashboards e e-commerce." />
 <meta name="twitter:image" content="https://vitorgomes.tech/images/eu.jpeg" />
@@ -91,8 +90,7 @@
         { "@type": "ListItem", "position": 1, "item": { "@type": "CreativeWork", "name": "Aylo.me", "url": "https://aylo.me", "creator": { "@id": "https://vitorgomes.tech/#person" }, "programmingLanguage": ["TypeScript", "React", "Next.js"] } },
         { "@type": "ListItem", "position": 2, "item": { "@type": "CreativeWork", "name": "Flamexs E-commerce", "url": "https://flamexs-ecommerce-production.up.railway.app/", "creator": { "@id": "https://vitorgomes.tech/#person" }, "programmingLanguage": ["PHP", "Laravel", "JavaScript"] } },
         { "@type": "ListItem", "position": 3, "item": { "@type": "CreativeWork", "name": "Speed Meeting Sorteio", "url": "https://speedmeeting.com.br", "creator": { "@id": "https://vitorgomes.tech/#person" }, "programmingLanguage": ["PHP", "Laravel", "JavaScript"] } },
-        { "@type": "ListItem", "position": 4, "item": { "@type": "SoftwareApplication", "name": "A Cidade Dorme", "url": "https://cidade-dorme-ten.vercel.app/", "applicationCategory": "GameApplication", "creator": { "@id": "https://vitorgomes.tech/#person" }, "programmingLanguage": ["TypeScript", "React", "Next.js"], "softwareRequirements": ["Supabase", "Realtime", "Edge Functions"] } },
-        { "@type": "ListItem", "position": 5, "item": { "@type": "CreativeWork", "name": "Engine Dance Habbo", "creator": { "@id": "https://vitorgomes.tech/#person" }, "programmingLanguage": ["TypeScript", "React", "CodeMirror", "Nitro"] } }
+        { "@type": "ListItem", "position": 4, "item": { "@type": "SoftwareApplication", "name": "A Cidade Dorme", "url": "https://cidade-dorme-ten.vercel.app/", "applicationCategory": "GameApplication", "creator": { "@id": "https://vitorgomes.tech/#person" }, "programmingLanguage": ["TypeScript", "React", "Next.js"], "softwareRequirements": ["Supabase", "Realtime", "Edge Functions"] } }
       ]
     }
   ]
@@ -100,14 +98,13 @@
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preconnect" href="https://unpkg.com">
 <link rel="dns-prefetch" href="https://api.github.com">
 <link rel="dns-prefetch" href="https://ghchart.rshah.org">
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <script>
-(function(){var t=localStorage.getItem('theme')||(window.matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);})();
+// Dark é o padrão do site: só cai para o claro se a pessoa escolher no toggle.
+(function(){var t=localStorage.getItem('theme');document.documentElement.setAttribute('data-theme',t==='light'?'light':'dark');})();
 </script>
-<script src="image-slot.js"></script>
 <style>
   :root, :root[data-theme="light"]{
     --bg:#f4ebe8;
@@ -731,9 +728,9 @@
     position:relative;
     overflow:hidden;
   }
-  .about-photo image-slot{
-    --is-bg:var(--paper);--is-fg:var(--muted);--is-border:transparent;
+  .about-photo .about-img{
     width:100%;height:100%;display:block;
+    object-fit:cover;object-position:center center;
   }
   .about-photo .cap{
     position:absolute;left:8px;bottom:-22px;
@@ -847,7 +844,7 @@
     background:
       linear-gradient(180deg, transparent, color-mix(in oklab, var(--accent) 12%, transparent)),
       radial-gradient(circle at 50% 42%, color-mix(in oklab, var(--accent) 18%, transparent), transparent 58%),
-      url("images/Aylo/aylo-1.png") center 48% / min(112%, 920px) auto no-repeat,
+      url("images/Aylo/aylo-1.webp") center 48% / min(112%, 920px) auto no-repeat,
       #100d10;
     position:relative;
     box-shadow:inset 0 0 0 1px rgba(255,255,255,.04), inset 0 -80px 90px -70px rgba(0,0,0,.75);
@@ -1502,7 +1499,7 @@
     <li><a href="#contato">Contato</a></li>
   </ul>
   <div class="nav-right">
-    <a href="javascript:window.print()" class="cv-link" title="Baixar CV em PDF" aria-label="Baixar CV"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg><span>CV</span></a>
+    <a href="images/Vitor-Gomes-Desenvolvedor-1.pdf" download="Vitor-Cavalcante-Desenvolvedor.pdf" class="cv-link" title="Baixar CV em PDF" aria-label="Baixar currículo em PDF"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg><span>CV</span></a>
     <button type="button" class="theme-toggle" id="themeToggle" aria-label="Alternar tema" title="Alternar tema">
       <svg class="ti sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
       <svg class="ti moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
@@ -1613,7 +1610,7 @@
 
   <div class="about-grid">
     <div class="about-photo reveal">
-      <image-slot id="vitor-photo" src="images/eu.jpeg" placeholder="Vitor Cavalcante" shape="rect"></image-slot>
+      <img class="about-img" src="images/eu.jpeg" alt="Vitor Cavalcante" width="400" height="400" loading="lazy" decoding="async">
       <span class="cap">// portrait · sp</span>
     </div>
     <div>
@@ -1718,7 +1715,7 @@
       <div class="project-desc">Projeto próprio em produção, com perfis bento, 15+ integrações, ranking, planos VIP e 1000+ ativos/dia.</div>
       <div class="project-meta-wrap">
         <div class="project-meta">2026 em produção</div>
-        <img class="project-thumb" src="images/Aylo/aylo-1.png" alt="Aylo preview" loading="lazy">
+        <img class="project-thumb" src="images/Aylo/aylo-1.webp" alt="Aylo preview" loading="lazy">
       </div>
       <span class="project-case">Ver case →</span>
       <span class="project-arrow">↗</span>
@@ -1735,7 +1732,7 @@
       <div class="project-desc">E-commerce acadêmico em Laravel com catálogo, carrinho, pedidos, autenticação e painel admin.</div>
       <div class="project-meta-wrap">
         <div class="project-meta">jan 2026 faculdade</div>
-        <img class="project-thumb" src="images/Flames/capa.png" alt="Flamexs E-commerce preview" loading="lazy">
+        <img class="project-thumb" src="images/Flames/capa.webp" alt="Flamexs E-commerce preview" loading="lazy">
       </div>
       <span class="project-case">Ver case →</span>
       <span class="project-arrow">↗</span>
@@ -1752,7 +1749,7 @@
       <div class="project-desc">Sistema de sorteio para eventos, com painel admin, importação Excel, tela de apresentação e exportação.</div>
       <div class="project-meta-wrap">
         <div class="project-meta">2025 cliente real</div>
-        <img class="project-thumb" src="images/Speed/capa.png" alt="Speed Meeting Sorteio preview" loading="lazy">
+        <img class="project-thumb" src="images/Speed/capa.webp" alt="Speed Meeting Sorteio preview" loading="lazy">
       </div>
       <span class="project-case">Ver case →</span>
       <span class="project-arrow">↗</span>
@@ -1769,24 +1766,7 @@
       <div class="project-desc">Jogo multiplayer online de papéis ocultos, com salas, chat, sorteio secreto, noite/dia, votação e realtime server-side.</div>
       <div class="project-meta-wrap">
         <div class="project-meta">jun 2026 online</div>
-        <img class="project-thumb" src="images/cidade-dorme/1.png" alt="A Cidade Dorme preview" loading="lazy">
-      </div>
-      <span class="project-case">Ver case →</span>
-      <span class="project-arrow">↗</span>
-    </button>
-
-    <button type="button" class="project" data-project="enginehabbo">
-      <span class="project-num">→ 05</span>
-      <div>
-        <div class="project-title">Engine Dance <span class="it">Habbo</span></div>
-        <div class="project-tags">
-          <span>React</span><span>TypeScript</span><span>CodeMirror</span><span>Nitro</span><span>Canvas</span>
-        </div>
-      </div>
-      <div class="project-desc">Editor visual para criar, testar e exportar danças de avatar estilo Habbo com preview pixelado em tempo real.</div>
-      <div class="project-meta-wrap">
-        <div class="project-meta">2026 ferramenta visual</div>
-        <img class="project-thumb contain" src="images/Habbo/1.png" alt="Engine Dance Habbo preview" loading="lazy">
+        <img class="project-thumb" src="images/cidade-dorme/1.webp" alt="A Cidade Dorme preview" loading="lazy">
       </div>
       <span class="project-case">Ver case →</span>
       <span class="project-arrow">↗</span>
@@ -1971,7 +1951,7 @@
         <span class="mark">&rdquo;</span>
         <blockquote>Excelente trabalho! Vitor fez nosso sistema para sorteio e ainda adicionou funcionalidades extras que nos ajudou muito, serviço rápido e no prazo correto!</blockquote>
         <div class="who">
-          <div class="av"><img src="images/carrossel/speed.jpg" alt="Daiana" loading="eager"></div>
+          <div class="av"><img src="images/carrossel/speed.webp" alt="Daiana" loading="eager"></div>
           <div><div class="name">Daiana</div><div class="role">Diretora · Speed Meeting · FeiraEBS</div></div>
         </div>
       </div>
@@ -1979,7 +1959,7 @@
         <span class="mark">&rdquo;</span>
         <blockquote>Em questão de minutos de alinhamento o Vitor já entendeu o meu problema e me deu uma solução moderna e do jeito que eu imaginava!</blockquote>
         <div class="who">
-          <div class="av"><img src="images/carrossel/amil.png" alt="Natalia Duete" loading="eager"></div>
+          <div class="av"><img src="images/carrossel/amil.webp" alt="Natalia Duete" loading="eager"></div>
           <div><div class="name">Natalia Duete</div><div class="role">ADM · Amil</div></div>
         </div>
       </div>
@@ -1987,7 +1967,7 @@
         <span class="mark">&rdquo;</span>
         <blockquote>Participei de um projeto com o Vitor e pude acompanhar um desenvolvimento limpo, com agilidade compôs bem minha equipe e nossas ideias!</blockquote>
         <div class="who">
-          <div class="av"><img src="images/carrossel/allan.png" alt="Allan Henrique" loading="eager"></div>
+          <div class="av"><img src="images/carrossel/allan.webp" alt="Allan Henrique" loading="eager"></div>
           <div><div class="name">Allan Henrique</div><div class="role">Programador</div></div>
         </div>
       </div>
@@ -2165,8 +2145,8 @@
       role:"Full-stack solo", team:"Solo", year:"2026", scope:"ativo",
       coverLabel:"AYLO.ME · home",
       gallery:["AYLO.ME · home","AYLO.ME · funções","AYLO.ME · ranking","AYLO.ME · perfil"],
-      images:["images/Aylo/aylo-1.png","images/Aylo/aylo-2.png","images/Aylo/aylo-3.png","images/Aylo/aylo-4.png"],
-      thumb:"images/Aylo/aylo-1.png",
+      images:["images/Aylo/aylo-1.webp","images/Aylo/aylo-2.webp","images/Aylo/aylo-3.webp","images/Aylo/aylo-4.webp"],
+      thumb:"images/Aylo/aylo-1.webp",
       problem:"Perfis de link bio genéricos não refletem identidade. Queria uma plataforma onde cada pessoa montasse um espaço online com personalidade real não só uma lista de links.",
       solution:["Perfis customizáveis com bento widgets e canvas de bilhetes digitais layout livre via drag-and-drop com @dnd-kit.","15+ integrações nativas: Instagram, GitHub, Discord, Spotify, Steam, Twitch e mais com widget Now Playing em tempo real.","Ranking público por visualizações, badges colecionáveis e sistema de verificação de conta.","Monetização com Stripe: planos VIP em 3 modalidades (mensal recorrente, avulso, anual), portal de assinatura e webhook de billing.","Auth própria com JWT (jose), anti-bot com Cloudflare Turnstile e upload via S3 com crop de avatar.","Deploy full-stack no Cloudflare Pages + Workers via OpenNext edge runtime, zero cold start."],
       metrics:[["1000+","usuários","ativos diariamente"],["3","planos VIP","mensal · avulso · anual"],["Edge","deploy","Cloudflare zero cold start"]],
@@ -2180,8 +2160,8 @@
       role:"Desenvolvedor Full-stack", team:"Solo", year:"2025", scope:"sistema sob demanda",
       coverLabel:"SPEED MEETING · capa",
       gallery:["SPEED · capa","SPEED · painel","SPEED · participantes","SPEED · sorteio","SPEED · apresentação","SPEED · logos","SPEED · exportação"],
-      images:["images/Speed/capa.png","images/Speed/1.png","images/Speed/2.png","images/Speed/3.png","images/Speed/4.png","images/Speed/5.png","images/Speed/6.png"],
-      thumb:"images/Speed/capa.png",
+      images:["images/Speed/capa.webp","images/Speed/1.webp","images/Speed/2.webp","images/Speed/3.webp","images/Speed/4.webp","images/Speed/5.webp","images/Speed/6.webp"],
+      thumb:"images/Speed/capa.webp",
       problem:"A equipe precisava operar sorteios durante eventos sem depender de planilhas soltas, evitando nomes repetidos e mantendo uma tela clara para projeção.",
       solution:["Painel para criar e gerenciar palestras com participantes vinculados.","Importação de listas via Excel e exportação de participantes e sorteados.","Sorteio aleatório sem repetição, com histórico e ordem dos ganhadores.","Tela de apresentação separada para uso em telão durante o evento.","Gerenciamento de logos de apoiadores/patrocinadores por palestra."],
       metrics:[["Excel","import/export","participantes e sorteados"],["Ao vivo","sorteio","sem repetir nomes"],["Telão","tela","apresentação para evento"]],
@@ -2195,8 +2175,8 @@
       role:"Desenvolvedor Full-stack", team:"Dupla", year:"2026", scope:"início de janeiro",
       coverLabel:"FLAMEXS · storefront",
       gallery:["FLAMEXS · capa","FLAMEXS · home","FLAMEXS · catálogo","FLAMEXS · produto","FLAMEXS · carrinho","FLAMEXS · checkout","FLAMEXS · admin","FLAMEXS · gestão"],
-      images:["images/Flames/capa.png","images/Flames/1.png","images/Flames/2.png","images/Flames/3.png","images/Flames/4.png","images/Flames/5.png","images/Flames/6.png","images/Flames/7.png"],
-      thumb:"images/Flames/capa.png",
+      images:["images/Flames/capa.webp","images/Flames/1.webp","images/Flames/2.webp","images/Flames/3.webp","images/Flames/4.webp","images/Flames/5.webp","images/Flames/6.webp","images/Flames/7.webp"],
+      thumb:"images/Flames/capa.webp",
       problem:"O desafio era estruturar uma loja virtual completa para praticar fluxo real de e-commerce: vitrine, produtos, conta de usuário, carrinho, pedidos e administração.",
       solution:["Arquitetura Laravel MVC com Blade para páginas públicas e administrativas.","Autenticação de cliente, login Google e fluxo separado para administradores.","Catálogo de produtos com categorias, detalhes de produto e carrinho em JavaScript.","Painel administrativo para produtos, categorias, usuários, vendas e administradores.","Deploy no Railway com documentação de setup, ambiente e rotas principais."],
       metrics:[["Laravel","12","base full-stack"],["2","áreas","cliente e admin"],["Railway","preview","deploy público"]],
@@ -2213,8 +2193,8 @@
       role:"Full-stack solo", team:"Solo", year:"2026", scope:"multiplayer realtime",
       coverLabel:"CIDADE DORME · lobby",
       gallery:["CIDADE DORME · home","CIDADE DORME · salas abertas","CIDADE DORME · ficha","CIDADE DORME · painel do host","CIDADE DORME · noite assassino","CIDADE DORME · votação","CIDADE DORME · decisão","CIDADE DORME · vitória cidade","CIDADE DORME · vitória assassinos","CIDADE DORME · chat e partida","CIDADE DORME · como jogar"],
-      images:["images/cidade-dorme/1.png","images/cidade-dorme/2.png","images/cidade-dorme/3.png","images/cidade-dorme/6.png","images/cidade-dorme/12.png","images/cidade-dorme/15.png","images/cidade-dorme/16.png","images/cidade-dorme/17.png","images/cidade-dorme/18.png","images/cidade-dorme/20.png","images/cidade-dorme/22.png"],
-      thumb:"images/cidade-dorme/1.png",
+      images:["images/cidade-dorme/1.webp","images/cidade-dorme/2.webp","images/cidade-dorme/3.webp","images/cidade-dorme/6.webp","images/cidade-dorme/12.webp","images/cidade-dorme/15.webp","images/cidade-dorme/16.webp","images/cidade-dorme/17.webp","images/cidade-dorme/18.webp","images/cidade-dorme/20.webp","images/cidade-dorme/22.webp"],
+      thumb:"images/cidade-dorme/1.webp",
       problem:"Transformar Cidade Dorme em uma experiência online completa: criar sala, reunir jogadores, distribuir papéis secretos com segurança, sincronizar fases e impedir que o jogo dependa de narrador manual ou combinados fora da tela.",
       solution:["SPA em Next.js 16 com React 19 e TypeScript, organizada por telas de entrada, lobby, partida e estados de sistema.","Backend Supabase com Auth anônima, Postgres, RLS, Realtime Broadcast e Edge Functions para ações autoritativas.","Sorteio server-side com papéis privados em tabela separada, evitando exposição de assassino, anjo e cidadão no cliente.","Loop Noite → Amanhecer → Dia → Votação → Fim com ações de assassino/anjo, votação, desempate, revanche, espectador e histórico.","Chat em tempo real por contexto de jogo, presença/reconexão, host transfer, limpeza de salas e rate limit nas mensagens.","Direção visual noir anos 1940-50 com cartas de suspeitos, carimbos, rádio, trilha/efeitos e interface responsiva mobile."],
       metrics:[["24","telas","fluxo completo do jogo"],["Realtime","sync","salas, chat e fases"],["Edge","regras","ações validadas no servidor"]],
@@ -2222,22 +2202,6 @@
       link:"https://cidade-dorme-ten.vercel.app/",
       linkLabel:"Ver site online",
       privateLabel:"Projeto autoral · online"
-    },
-    enginehabbo:{
-      num:"05", title:'Engine Dance <span class="it">Habbo</span>',
-      status:"Ferramenta visual · 2026",
-      lead:"Editor para criar, testar e exportar animações de dança para avatar estilo Habbo, com preview em canvas e linguagem própria para montar frames.",
-      role:"Desenvolvedor Front-end", team:"Solo", year:"2026", scope:"engine/editor visual",
-      coverLabel:"ENGINE DANCE · editor visual",
-      gallery:["ENGINE · editor visual"],
-      images:["images/Habbo/1.png"],
-      thumb:"images/Habbo/1.png",
-      imageFit:"contain",
-      problem:"Criar danças para avatar exige testar frames, partes do corpo, deslocamentos e repetições. Fazer isso direto em JSON ou arquivo final torna o processo lento e difícil de visualizar.",
-      solution:["Editor CodeMirror com autocomplete para partes do corpo, ações e modificadores como dx, dy, dd e frame.","Preview em canvas com avatar pixelado atualizando em tempo real conforme a animação muda.","Compilador de sintaxe curta para transformar blocos legíveis em frames estruturados.","Exemplos prontos de dança para acelerar prototipação e comparação de movimentos.","Exportação do resultado em arquivo .nitro para empacotar a animação final."],
-      metrics:[["Canvas","preview","avatar em tempo real"],[".nitro","export","arquivo empacotado"],["DSL","editor","sintaxe própria"]],
-      stack:["React","TypeScript","CodeMirror","Mantine","Valtio","Rsbuild","Nitro Renderer","Canvas"],
-      privateLabel:"Repositório local · em organização"
     }
   };
   const pmBackdrop=document.getElementById('pmBackdrop');
@@ -2360,15 +2324,20 @@
   const root=document.documentElement;
   const btn=document.getElementById('themeToggle');
   if(!btn) return;
+  // Mesma regra do script anti-flash do <head>: dark sempre, salvo escolha explícita.
+  const meta=document.getElementById('themeColorMeta');
+  const syncMeta=t=>{ if(meta) meta.setAttribute('content', t==='light' ? '#f4ebe8' : '#141417'); };
   const saved=localStorage.getItem('theme');
-  const initial=saved || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-  root.setAttribute('data-theme',initial);
+  const initial = saved==='light' ? 'light' : 'dark';
+  root.setAttribute('data-theme', initial);
+  syncMeta(initial);
   btn.addEventListener('click',(e)=>{
     e.preventDefault();
     e.stopPropagation();
     const cur=root.getAttribute('data-theme')==='dark'?'dark':'light';
     const next=cur==='dark'?'light':'dark';
     root.setAttribute('data-theme',next);
+    syncMeta(next);
     localStorage.setItem('theme',next);
     btn.classList.remove('pulsing');
     void btn.offsetWidth;
@@ -2666,7 +2635,7 @@
     background:
       linear-gradient(180deg, transparent, color-mix(in oklab, var(--accent) 12%, transparent)),
       radial-gradient(circle at 50% 42%, color-mix(in oklab, var(--accent) 18%, transparent), transparent 58%),
-      url("images/Aylo/aylo-1.png") center 48% / 110% auto no-repeat,
+      url("images/Aylo/aylo-1.webp") center 48% / 110% auto no-repeat,
       #100d10;
   }
   .featured-visual::after{left:12px;bottom:12px;font-size:.55rem;padding:6px 8px}
@@ -2901,8 +2870,8 @@
   })();
 </script>
 
-<!-- Cena 3D do hero -->
-<script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
-<script src="hero-3d.js"></script>
+<!-- Cena 3D do hero — three.js servido do próprio domínio (sem CDN de terceiro) -->
+<script src="vendor-three.min.js" defer></script>
+<script src="hero-3d.js" defer></script>
 </body>
 </html>
